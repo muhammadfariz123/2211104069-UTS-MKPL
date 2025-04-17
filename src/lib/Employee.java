@@ -52,25 +52,30 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}
-	}
-	
+	 private static final int GRADE_1_SALARY = 3000000;
+	 private static final int GRADE_2_SALARY = 5000000;
+	 private static final int GRADE_3_SALARY = 7000000;
+	 private static final double FOREIGNER_MULTIPLIER = 1.5;
+	 
+	 public void setMonthlySalary(int grade) {
+		 int baseSalary = 0;
+		 switch (grade) {
+			 case 1:
+				 baseSalary = GRADE_1_SALARY;
+				 break;
+			 case 2:
+				 baseSalary = GRADE_2_SALARY;
+				 break;
+			 case 3:
+				 baseSalary = GRADE_3_SALARY;
+				 break;
+			 default:
+				 System.err.println("Invalid grade: " + grade);
+				 return;
+		 }
+		 this.monthlySalary = isForeigner ? (int)(baseSalary * FOREIGNER_MULTIPLIER) : baseSalary;
+	 }
+	 
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
 	}
